@@ -1,8 +1,8 @@
 # Introduction
 
-[![GoDoc](https://godoc.org/github.com/elazarl/goproxy?status.svg)](https://godoc.org/github.com/elazarl/goproxy)
+[![GoDoc](https://godoc.org/github.com/tcchrist/goproxy?status.svg)](https://godoc.org/github.com/tcchrist/goproxy)
 [![Join the chat at https://gitter.im/elazarl/goproxy](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/elazarl/goproxy?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-![Status](https://github.com/elazarl/goproxy/workflows/Go/badge.svg)
+![Status](https://github.com/tcchrist/goproxy/workflows/Go/badge.svg)
 
 Package goproxy provides a customizable HTTP proxy library for Go (golang),
 
@@ -49,7 +49,7 @@ To get a taste of `goproxy`, a basic HTTP/HTTPS transparent proxy
 package main
 
 import (
-    "github.com/elazarl/goproxy"
+    "github.com/tcchrist/goproxy"
     "log"
     "net/http"
 )
@@ -150,8 +150,8 @@ proxy.OnRequest(goproxy.UrlMatches(regexp.MustCompile(`.*gif$`))).Do(YourReqHand
 # What's New
 
 1. Ability to `Hijack` CONNECT requests. See
-[the eavesdropper example](https://github.com/elazarl/goproxy/blob/master/examples/goproxy-eavesdropper/main.go#L27)
-2. Transparent proxy support for http/https including MITM certificate generation for TLS.  See the [transparent example.](https://github.com/elazarl/goproxy/tree/master/examples/goproxy-transparent)
+[the eavesdropper example](https://github.com/tcchrist/goproxy/blob/master/examples/goproxy-eavesdropper/main.go#L27)
+2. Transparent proxy support for http/https including MITM certificate generation for TLS.  See the [transparent example.](https://github.com/tcchrist/goproxy/tree/master/examples/goproxy-transparent)
 
 # License
 

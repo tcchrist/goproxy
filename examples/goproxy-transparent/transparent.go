@@ -11,7 +11,7 @@ import (
 	"net/url"
 	"regexp"
 
-	"github.com/elazarl/goproxy"
+	"github.com/tcchrist/goproxy"
 	"github.com/inconshreveable/go-vhost"
 )
 
