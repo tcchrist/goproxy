@@ -161,12 +161,28 @@ func (proxy *ProxyHttpServer) ServeHTTP(w http.ResponseWriter, r *http.Request) 
 		}
 		copyHeaders(w.Header(), resp.Header, proxy.KeepDestinationHeaders)
 		w.WriteHeader(resp.StatusCode)
-		nr, err := io.Copy(w, resp.Body)
+
+		// adjust writer to enable auto flush if required (eg: SSE)
+		copyWriter := enableAutoFlush(w, resp)
+
+		nr, err := io.Copy(copyWriter, resp.Body)
 		if err := resp.Body.Close(); err != nil {
 			ctx.Warnf("Can't close response body %v", err)
 		}
 		ctx.Logf("Copied %v bytes to client error=%v", nr, err)
 	}
+}
+
+func enableAutoFlush(w http.ResponseWriter, resp *http.Response) io.Writer {
+
+	// default case: don't change current writer
+	var copyWriter io.Writer = w
+
+	// if flush is required (eg: SSE), wrap writer in flush writer
+	if w.Header().Get("content-type") == "text/event-stream" {
+		copyWriter = NewFlushWriter(w)
+	}
+	return copyWriter
 }
 
 // NewProxyHttpServer creates and returns a proxy server, logging to stderr by default
